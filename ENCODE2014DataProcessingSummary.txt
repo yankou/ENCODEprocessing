@@ -1,0 +1,25 @@
+Data processing summary
+
+1. Query "ChIP-seq" AND ("bed_narrowPeak" OR "bed_broadPeak" OR "broadPeak" OR "narrowPeak") on encodeproject.org on Nov. 10, 2014  
+	--> 1551 entries, results in ENCODE_ChIPseq_all_20141010.json
+
+2. Download 2803 peak files from 1551 entries; create metadata lookup table ENCODE_ChIPseq_all_20141010_metadata.csv  < parseJson.py >
+	689 peak files can't open. All "uniformelyProcessedPeakCalls", probably from ENCODE 2003-2012
+
+3. Map bed files to their metadata. <datset2metadata.py>
+	1699 human datasets
+	415 mouse datasets
+	2114 datasets in total
+
+4. Map peaks to genes. 
+	4.1 peak2GeneBatch.java 
+	4.2 enrichGene.java  (+/- 2k of TSS)
+	4.3 sortGene2.java   (take top 3000 genes according to distance to TSS)
+
+5. Take consensus genes if replicates exist for a unique experiment.  < mergeReplicate.py >
+	1053 experiments have no replicates   (keep top 2000 genes)
+	525 experiments have two or three replicates   (take consensus genes from top 3000 genes in each replicate)
+
+6. Make gmt files for TFBS and HM.   < makeGMT.py >
+	1022 TFBS has >= 100 genes per line. (43 removed)
+	508 HM has >= 100 genes per line.  (5 removed)
