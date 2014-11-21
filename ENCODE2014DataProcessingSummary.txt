@@ -1,4 +1,5 @@
 Data processing summary
+Yan Kou  2014-11-21
 
 1. Query "ChIP-seq" AND ("bed_narrowPeak" OR "bed_broadPeak" OR "broadPeak" OR "narrowPeak") on encodeproject.org on Nov. 10, 2014  
 	--> 1551 entries, results in ENCODE_ChIPseq_all_20141010.json
